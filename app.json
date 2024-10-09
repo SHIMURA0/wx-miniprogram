@@ -1,0 +1,38 @@
+{ 
+  "pages": [
+    "pages/auth/auth",
+    "pages/index/index",
+    "pages/use/use",
+    "pages/use/sequencer/sequencer",
+    "pages/use/workbench/workbench",
+    "pages/use/room/room",
+    "pages/use/room/daily/daily",
+    "pages/use/room/fridge/fridge",
+    "pages/use/room/room2/room2",
+    "pages/maintain/maintain",
+    "pages/repair/repair"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "permission": {
+    "scope.camera": {
+      "desc": "需要使用您的相机进行扫码"
+    }
+  },
+  "style": "v2",
+  "renderer": "webview",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
+    }
+  },
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+
+}

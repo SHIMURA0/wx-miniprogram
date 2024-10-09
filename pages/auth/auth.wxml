@@ -1,0 +1,10 @@
+<view class="container">
+  <view wx:if="{{showNameInput}}" class="name-input-container">
+    <text>请输入您的真实姓名</text>
+    <input type="text" placeholder="真实姓名" bindinput="inputRealName" value="{{realName}}" />
+    <button bindtap="submitRealName">提交</button>
+  </view>
+</view>
+
+
+

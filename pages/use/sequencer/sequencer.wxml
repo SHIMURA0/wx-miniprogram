@@ -1,0 +1,303 @@
+<!-- 导航栏，最顶部那一栏 -->
+<navigation-bar 
+  title="测序仪使用记录" 
+  back="{{true}}" 
+  color="white" 
+  background="#4A90E2">
+</navigation-bar>
+
+<view class="container">
+  <scroll-view scroll-y="true" class="form-scroll">
+    <view class="header">
+      <text class="main-title">{{isSequencing ? '测序使用记录' : '非测序使用记录'}}</text>
+      <view class="switch-container">
+        <text class="switch-label">是否测序</text>
+        <switch checked="{{isSequencing}}" bindchange="switchSequencing" />
+      </view>
+    </view>
+
+    <form bindsubmit="submitForm">
+      <block wx:if="{{isSequencing}}">
+        <view class="form-group horizontal">
+          <view class="form-item">
+            <view class="text-box">
+              <text class="label" >操作人员</text>
+            </view>
+            <text class="value readonly-value" style="width: 295rpx; display: block; box-sizing: border-box">{{operatorName}}</text>
+          </view>
+
+          <view class="form-item">
+            <view class="text-box-orange">
+            <text class="label">操作类型</text>
+            </view>
+            <picker bindchange="bindOperationChange" value="{{operationIndex}}" range="{{operations}}">
+              <view class="picker" style="width: 295rpx; display: block; box-sizing: border-box">
+                {{operationIndex === null ? "请选择操作类型" : operations[operationIndex]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="form-group horizontal">
+          <view class="form-item">
+            <view class="text-box">
+            <text class="label">选定仪器</text>
+            </view>
+            <text class="value readonly-value" style="width: 295rpx; display: block; box-sizing: border-box">{{selectedInstrument}}</text>
+          </view>
+
+          <view class="form-item">
+            <view class="text-box">
+            <text class="label">仪器编号</text>
+            </view>
+            <text class="value readonly-value" style="width: 295rpx; display: block; box-sizing: border-box">{{instrumentNumbers}}</text>
+          </view>
+        </view>
+        <view class="form-group horizontal">
+          <view class="form-item">
+            <view class="text-box-orange">
+            <text class="label">仪器状态</text>
+            </view>
+            <picker bindchange="bindStatusChange" value="{{statusIndex}}" range="{{statuses}}">
+              <view class="picker" style="width: 295rpx; display: block; box-sizing: border-box; {{statusStyle}}">
+                {{statusIndex !== null ? statuses[statusIndex] : '请选择仪器状态'}}
+              </view>
+            </picker>
+          </view>
+          <!-- 295rpx -->
+          <view class="form-item" wx:if="{{statusIndex !== 1 && operations[operationIndex] !== '关闭仪器'}}">
+            <view class="text-box-orange">
+            <text class="label">测序槽类型</text>
+            </view>
+            <picker bindchange="bindSlotTypeChange" value="{{slotTypeIndex}}" range="{{slotTypes}}">
+              <view class="picker" style="width: 295rpx; display: block; box-sizing: border-box">
+                {{slotTypeIndex !== null ? slotTypes[slotTypeIndex] : '请选择测序槽类型'}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="form-group" wx:if="{{statusIndex !== 1 && operations[operationIndex] !== '关闭仪器' && slotTypeIndex !== null}}" >
+          <!-- <view class="chip-sequence-container" wx:if="{{slotTypes[slotTypeIndex] === 'A' || slotTypes[slotTypeIndex] === 'A + B'}}">
+            <view class="text-box-orange">
+              <view class="label-row">
+                <text class="label">测序槽A芯片序列号</text>
+                <view class="scan-button" bindtap="scanCode" data-slot="A">
+                  <image src="/media/scan.png" mode="aspectFit" />
+                  <text>扫码</text>
+                </view>
+              </view>
+            </view>
+            <view class="input-container">
+              <input 
+                class="chip-input"
+                type="text" 
+                bindinput="inputChipSequenceA" 
+                value="{{chipSequenceA}}"
+                maxlength="11"
+              />
+              <text class="error-message" wx:if="{{hasStartedTypingA && chipSequenceErrorA}}">{{chipSequenceErrorA}}</text>
+            </view>
+          </view> -->
+          <view class="chip-sequence-container" wx:if="{{slotTypes[slotTypeIndex] === 'A' || slotTypes[slotTypeIndex] === 'A + B'}}">
+            
+            <view class="header-row">
+              <view class="text-box-orange">
+              <text class="label">测序槽A芯片序列号</text>
+              </view>
+              <view class="text-box-orange" bindtap="scanCode" data-slot="A">
+              <text class="label">扫码识别</text>
+              </view>
+              <!-- <view class="scan-button" bindtap="scanCode" data-slot="A">
+                <image src="/media/scan3.png" mode="aspectFit" />
+            
+              </view> -->
+            </view>
+            
+            <view class="input-container">
+              <input 
+                class="chip-input"
+                type="text" 
+                bindinput="inputChipSequenceA" 
+                value="{{chipSequenceA}}"
+                maxlength="11"
+                placeholder="请输入芯片序列号"
+              />
+              <text class="error-message" wx:if="{{hasStartedTypingA && chipSequenceErrorA}}">{{chipSequenceErrorA}}</text>
+            </view>
+          </view>
+
+
+          <view class="chip-sequence-container" wx:if="{{slotTypes[slotTypeIndex] === 'B' || slotTypes[slotTypeIndex] === 'A + B'}}">
+            <!-- <view class="text-box-orange">
+              <view class="label-row">
+                <text class="label">（测序槽B）芯片序列号</text>
+                <view class="scan-button" bindtap="scanCode" data-slot="B">
+                  <image src="/media/scan2.png" mode="aspectFit" />
+                  <text>扫码</text>
+                </view>
+              </view>
+            </view> -->
+
+            <view class="header-row">
+              <view class="text-box-orange">
+              <text class="label">测序槽B芯片序列号</text>
+              </view>
+              <view class="text-box-orange" bindtap="scanCode" data-slot="A">
+              <text class="label">扫码识别</text>
+              </view>
+              <!-- <view class="scan-button" bindtap="scanCode" data-slot="A">
+                <image src="/media/scan3.png" mode="aspectFit" />
+            
+              </view> -->
+            </view>
+
+            <view class="input-container">
+              <input 
+                class="chip-input"
+                type="text" 
+                bindinput="inputChipSequenceB" 
+                value="{{chipSequenceB}}"
+                maxlength="11"
+                placeholder="请输入芯片序列号"
+              />
+              <text class="error-message" wx:if="{{hasStartedTypingB && chipSequenceErrorB}}">{{chipSequenceErrorB}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+      <!-- 非测序表单 -->
+      <block wx:else>
+        <view class="form-group horizontal">
+          <view class="form-item">
+            <view class="text-box">
+            <text class="label">操作人员</text>
+            </view>
+            <text class="value readonly-value" style="width: 295rpx; display: block; box-sizing: border-box">{{operatorName}}</text>
+          </view>
+
+          <view class="form-item">
+            <view class="text-box-orange">
+            <text class="label">操作类型</text>
+            </view>
+            <picker bindchange="bindOperationChange" value="{{operationIndex}}" range="{{nonSeqOperations}}">
+              <view class="picker" style="width: 295rpx; display: block; box-sizing: border-box">
+                {{operationIndex === null ? "请选择操作类型" : nonSeqOperations[operationIndex]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="form-group" wx:if="{{statusIndex !== 1 && nonSeqOperations[operationIndex] !== '关闭仪器'}}">
+          <view class="text-box-orange">
+          <text class="label">操作原因</text>
+          </view>
+          <textarea 
+            style="height: 200rpx; display: block; box-sizing: border-box; width: 100%;" 
+            bindinput="inputOperationReason" 
+            value="{{operationReason}}"
+            placeholder="请填写使用原因（打开仪器时必填）"
+          />
+        </view>
+        <view class="form-group horizontal">
+          <view class="form-item">
+            <view class="text-box">
+            <text class="label">选定仪器</text>
+            </view>
+            <text class="value readonly-value" style="width: 295rpx; display: block; box-sizing: border-box">{{selectedInstrument}}</text>
+          </view>
+
+          <view class="form-item">
+            <view class="text-box">
+            <text class="label">仪器编号</text>
+            </view>
+            <text class="value readonly-value" style="width: 295rpx; display: block; box-sizing: border-box">{{instrumentNumbers}}</text>
+          </view>
+        </view>
+        <view class="form-group">
+          <view class="text-box-orange">
+          <text class="label">仪器状态</text>
+          </view>
+          <picker bindchange="bindStatusChange" value="{{statusIndex}}" range="{{statuses}}" style="flex: 1;">
+            <view class="picker" style="width: 100%; display: block; box-sizing: border-box">
+              {{statusIndex !== null ? statuses[statusIndex] : '请选择仪器状态'}}
+            </view>
+          </picker>
+        </view>
+      </block>
+      <view class="form-group">
+        <view class="text-box">
+          <text class="label">操作日期</text>
+        </view>
+        <text class="value readonly-value">{{currentDateTime}}</text>
+      </view>
+      <view class="form-group">
+        <view class="text-box-orange">
+        <text class="label">备注</text>
+        </view>
+        <textarea 
+          style="height: 200rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx" bindinput="inputRemarks"
+          value="{{remarks}}"
+          placeholder="如有特殊情况，请填写备注"
+        />
+      </view>
+      <button 
+        form-type="submit" 
+        type="primary" 
+        disabled="{{!isFormValid}}" 
+        style="opacity: {{isFormValid ? 1 : 0.5}}; pointer-events: {{isFormValid ? 'auto' : 'none'}};">提交
+      </button>
+    </form>
+  </scroll-view>
+
+
+<view class="modal" hidden="{{!showBackupModal}}">
+  <view class="modal-content">
+    <view class="modal-title">数据备份确认</view>
+      <view class="modal-body">
+        <text>请确认数据是否已经备份上传或导出？</text>
+        <radio-group bindchange="onBackupConfirm">
+          <label><radio value="1" checked="{{backupRadioValue === '1'}}" />是</label>
+          <label><radio value="0" checked="{{backupRadioValue === '0'}}" color="#ff0000" />否</label>
+        </radio-group>
+      </view>
+      <view class="modal-footer">
+        <button bindtap="closeBackupModal">取消</button>
+        <button 
+          bindtap="confirmBackup" 
+          disabled="{{backupRadioValue === '0'}}"
+          class="{{backupRadioValue === '1' ? 'confirm-button-enabled' : 'confirm-button-disabled'}}"
+        >确认</button>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- 异常状态弹窗 -->
+  <view class="modal" hidden="{{!showAbnormalModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>请具体描述仪器的异常表现</text>
+      </view>
+      <view class="modal-body">
+        <textarea bindinput="inputAbnormalDescription" placeholder="请输入具体的异常表现"></textarea>
+      </view>
+      <view class="modal-footer">
+        <button bindtap="submitAbnormalDescription">提交</button>
+      </view>
+    </view>
+  </view>
+
+  <modal hidden="{{!showConfirmModal}}" title="确认提交" confirm-text="确认" cancel-text="取消" bindcancel="closeConfirmModal" bindconfirm="confirmSubmit">
+      <rich-text nodes="{{confirmContent}}"></rich-text>
+  </modal>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+

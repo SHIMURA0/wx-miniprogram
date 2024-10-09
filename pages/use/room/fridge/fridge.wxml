@@ -1,0 +1,263 @@
+<!-- 导航栏，最顶部那一栏 -->
+<navigation-bar 
+  title="冷冻设备监测记录" 
+  back="{{true}}" 
+  color="white" 
+  background="#4A90E2">
+</navigation-bar>
+<!-- 导航栏，最顶部那一栏 -->
+
+<!-- 页面主体 -->
+<view class="container">
+  <scroll-view scroll-y="true" class="form-scroll">
+
+    <!-- 页面标题模块 -->
+    <view class="header">
+      <text class="main-title">{{freezerFridge === 'freezer' ? '冰柜温度监测记录' : '冰箱温度监测记录'}}</text>
+    </view>
+    <!-- 页面标题模块 -->
+    
+    <!-- 额外的功能 -->
+    <!-- <view class="form-group">
+      <view class="text-box-orange">
+        <text class="label">查看今日冰柜温度监测记录</text>
+      </view>
+    </view> -->
+
+    <!-- 温度监测记录表单 -->
+    <form bindsubmit="submitForm">
+      <!-- 第一个大框 -->
+      <view class="form-group horizontal">
+        <!-- 操作人员模块 -->
+        <view class="form-item">
+          <view class="text-box">
+            <text class="label" >操作人员</text>
+          </view>
+          <text class="value readonly-value" style="width: 295rpx; display: block; box-sizing: border-box">{{operatorName}}</text>
+        </view>
+        <!-- 操作人员模块 -->
+        <!-- 房间编号模块 -->
+        <view class="form-item">
+          <view class="text-box">
+            <text class="label">房间编号</text>
+          </view>
+          <text class="value readonly-value" style="width: 295rpx; display: block; box-sizing: border-box">{{roomNumber}}</text>
+        </view>
+        <!-- 房间编号模块 -->
+      </view>
+      <!-- 第一个大框 -->
+      <!-- 第二个大框 -->
+      <view class="form-group horizontal">
+        <!-- 仪器编号模块 -->
+        <view class="form-item">
+          <view class="text-box">
+            <text class="label" >{{freezerFridge === 'freezer' ? '冰柜编号' : '冰箱编号'}}</text>
+          </view>
+          <text 
+            class="value readonly-value" 
+            style="width: 295rpx; display: block; box-sizing: border-box">{{freezerFridge === 'freezer' ? freezerNumber : fridgeNumber}}
+          </text>
+        </view>
+        <!-- 仪器编号模块 -->
+        <!-- 仪器状态模块 -->
+        <view class="form-item">
+          <view class="text-box-orange">
+            <text class="label">{{freezerFridge === 'freezer' ? '冰柜状态' : '冰箱状态'}}</text>
+          </view>
+          <picker bindchange="bindIceStatusChange" value="{{iceStatusIndex}}" range="{{iceStatus}}">
+            <view 
+              class="picker" 
+              style="width: 295rpx; display: block; box-sizing: border-box"
+            >
+              {{iceStatusIndex === null ? "请检查冰柜状态" : iceStatus[iceStatusIndex]}}
+            </view>
+          </picker>
+        </view>
+        <!-- 仪器状态模块 -->
+      </view>
+      <!-- 第二个大框 -->
+      <!-- 第三个大框，温湿度计和湿温度计读数并排水平排列 -->
+      <view class="form-group horizontal" wx:if="{{iceStatus[iceStatusIndex] !== '异常' && thNumber !== ''}}">
+        <!-- 温湿度计状态模块 -->
+        <view class="form-item" wx:if="{{statusIndex !== 1 && operations[operationIndex] !== '关闭仪器'}}">
+          <view class="text-box-orange">
+            <text class="label">温湿度计状态</text>
+          </view>
+          <picker 
+            bindchange="bindtthStatusChange" 
+            value="{{thStatusIndex}}" 
+            range="{{thStatus}}"
+          >
+            <view 
+              class="picker" 
+              style="width: 295rpx; display: block; box-sizing: border-box"
+            >
+              {{thStatusIndex !== null ? thStatus[thStatusIndex] : '请检查状态'}}
+            </view>
+          </picker>
+        </view>
+        <!-- 温湿度计状态模块 -->
+        <!-- 温湿度计读数输入模块 -->
+        <view class="form-item" wx:if="{{thStatus[thStatusIndex] === '正常'}}">
+          <view class="text-box-orange">
+            <text class="label">温湿度计读数</text>
+          </view>
+          <input 
+            style="height: 80rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx" 
+            bindinput="inputth"
+            value="{{thInput}}"
+            placeholder="请读取湿温度"
+          />
+        </view>
+        <!-- 温湿度计读数输入模块 -->
+        <!-- 温湿度计编号模块 -->
+        <view class="form-item" wx:if="{{thStatus[thStatusIndex] !== '正常'}}">
+          <view class="text-box">
+            <text class="label">仪器编号</text>
+          </view>
+          <text 
+            class="value readonly-value" 
+            style="width: 295rpx; display: block; box-sizing: border-box">{{thNumber}}
+          </text>
+        </view>
+        <!-- 温湿度计编号模块 -->
+      </view>
+      <!-- 在湿温度计状态选择为异常时显示用来记录备用的湿温度计读数 -->
+      <view class="form-group" wx:if="{{thStatus[thStatusIndex] === '异常' && iceStatus[iceStatusIndex] !== '异常'}}">
+        <view class="text-box-orange">
+          <text class="label">备用！温湿度计读数</text>
+        </view>
+        <input 
+            style="height: 80rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx" 
+            bindinput="inputthBackUp"
+            value="{{thBackUpInput}}"
+            placeholder="请读取备用温湿度计"
+          />
+      </view>
+      <!-- 在湿温度计状态选择为异常时显示用来记录备用的湿温度计读数 -->
+      <!-- 第四个大框，只有当传入温度计和仪器状态为正常的时候才会显示的框 -->
+      <view class="form-group horizontal" wx:if="{{iceStatus[iceStatusIndex] !== '异常' && tNumber !== ''}}">
+        <!-- 只有在冷冻设备状态为选定或者为正常的时候才会显示 -->
+        <view class="form-item" wx:if="{{iceStatus[iceStatusIndex] !== '异常'}}">
+          <view class="text-box-orange">
+            <text class="label">温度计状态</text>
+          </view>
+          <picker 
+            bindchange="bindtStatusChange" 
+            value="{{tStatusIndex}}" 
+            range="{{tStatus}}"
+          >
+            <view 
+              class="picker" 
+              style="width: 295rpx; display: block; box-sizing: border-box"
+            >
+              {{tStatusIndex !== null ? tStatus[tStatusIndex] : '请检查状态'}}
+            </view>
+          </picker>
+        </view>
+        <!-- 只有在冷冻设备状态为选定或者为正常的时候才会显示 -->
+        <!-- 只有当温度计状态为正常的时候才显示 -->
+        <view class="form-item" wx:if="{{tStatus[tStatusIndex] === '正常'}}">
+          <view class="text-box-orange">
+            <text class="label">数字温度计读数</text>
+          </view>
+          <input 
+            style="height: 80rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx" 
+            bindinput="inputT"
+            value="{{tInput}}"
+            placeholder="请读取温度"
+          />
+        </view>
+        <!-- 只有当温度计状态为正常的时候才显示 -->
+        <!-- 只有当温度计状态没有选定或者状态为异常的时候显示温度计的仪器编号 -->
+        <view class="form-item" wx:if="{{tStatus[tStatusIndex] !== '正常'}}">
+          <view class="text-box">
+            <text class="label">仪器编号</text>
+          </view>
+          <text 
+            class="value readonly-value" 
+            style="width: 295rpx; display: block; box-sizing: border-box"
+          >{{tNumber}}
+          </text>
+        </view>
+        <!-- 只有当温度计状态没有选定或者状态为异常的时候显示温度计的仪器编号 -->
+      </view>
+      <!-- 只有当温度计状态为异常的时候+冷冻设备状态不为异常的时候才会显示 -->
+      <view class="form-group" wx:if="{{tStatus[tStatusIndex] === '异常' && iceStatus[iceStatusIndex] !== '异常'}}">
+        <view class="text-box-orange">
+          <text class="label">备用！温度计读数</text>
+        </view>
+        <input 
+            style="height: 80rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx" 
+            bindinput="inputTBackUp"
+            value="{{tBackUpInput}}"
+            placeholder="请读取备用温度计"
+          />
+      </view>
+      <!-- 只有当温度计状态为异常的时候+冷冻设备状态不为异常的时候才会显示 -->
+
+      <view class="form-group">
+        <view class="text-box">
+          <text class="label">操作日期</text>
+        </view>
+        <text class="value readonly-value">{{currentDateTime}}</text>
+      </view>
+      <view class="form-group">
+        <view class="text-box-orange">
+        <text class="label">备注</text>
+        </view>
+        <textarea 
+          style="height: 200rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx" bindinput="inputRemarks"
+          value="{{remarks}}"
+          placeholder="如有额外补充的，请填写备注"
+        />
+      </view>
+      <button 
+        form-type="submit" 
+        type="primary" 
+        disabled="{{!isFormValid}}" 
+        style="opacity: {{isFormValid ? 1 : 0.5}}; pointer-events: {{isFormValid ? 'auto' : 'none'}};">提交
+      </button>
+    </form>
+  </scroll-view>
+
+  <!-- 异常状态弹窗填写具体的异常表现 -->
+  <view class="modal" hidden="{{!showAbnormalModal}}">
+
+    <view class="modal-content">
+
+      <view class="modal-header">
+        <text>请具体描述冰柜的异常表现</text>
+      </view>
+
+      <view class="modal-body">
+        <textarea 
+          bindinput="inputAbnormalDescription" 
+          placeholder="请输入冰柜具体的异常表现">
+      </textarea>
+
+    </view>
+
+    <view class="modal-footer">
+      <button 
+        bindtap="submitAbnormalDescription">提交
+      </button>
+    </view>
+
+  </view>
+
+  </view>
+
+  <modal 
+    hidden="{{!showConfirmModal}}" 
+    title="确认提交" 
+    confirm-text="确认" 
+    cancel-text="取消" 
+    bindcancel="closeConfirmModal" 
+    bindconfirm="confirmSubmit"
+  >
+    <rich-text nodes="{{confirmContent}}">
+    </rich-text>
+  </modal>
+
+</view>

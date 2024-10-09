@@ -1,0 +1,145 @@
+<navigation-bar 
+  title="实验室II仪器使用记录" 
+  back="{{true}}" 
+  color="white" 
+  background="#4A90E2">
+</navigation-bar>
+
+<view class="page-content">
+  <scroll-view 
+    class="scroll-container"
+    scroll-y="{{!showDialog}}" 
+    catchtouchmove="{{showDialog ? 'preventTouchMove' : ''}}"
+  >
+    <view class="container {{showDialog ? 'no-scroll' : ''}}">
+      <view class="header instrument-card">
+        <text class="header-title">房间II样品处理室</text>
+        <view class="header-info">
+          <view class="header-item">
+            <text class="label">进入/离开房间：</text>
+            <view class="colored-box operation">{{operation === 'enter' ? '进入' : '离开'}}</view>
+          </view>
+          <view class="header-item">
+            <text class="label">实验操作人员：</text>
+            <view class="colored-box operator">{{operatorName}}</view>
+          </view>
+          <view class="header-item" wx:if="{{operation === 'enter'}}">
+            <text class="label">选定实验流程：</text>
+            <view class="colored-box process">{{process}}</view>
+          </view>
+        </view>
+      </view>
+
+      <block wx:if="{{operation === 'enter' && !if_submit}}">
+        <view wx:for="{{instruments}}" wx:key="name" wx:for-index="instrumentIndex" class="instrument-card">
+          <view class="instrument-header">
+            <text class="instrument-name">{{item.name}}</text>
+            <view class="instrument-controls">
+              <text wx:if="{{item.numbers.length === 1 && item.numbers[0].hasCNAS}}" class="cnas-box">CNAS</text>
+              <switch 
+                class="switch-instrument"
+                checked="{{item.inUse}}" 
+                bindchange="toggleUsage" 
+                data-index="{{instrumentIndex}}"
+              />
+            </view>
+          </view>
+
+          <view wx:for="{{item.numbers}}" wx:for-item="number" wx:key="number" wx:for-index="numberIndex" class="number-item">
+            <view class="number-section">
+              <text class="instrument-number">编号：{{number.number}}</text>
+              <view class="number-controls">
+                <text wx:if="{{item.numbers.length >= 2 && number.hasCNAS}}" class="cnas-box">CNAS</text>
+                <switch 
+                  class="switch-number"
+                  wx:if="{{item.numbers.length >= 2}}"
+                  checked="{{number.inUse}}"
+                  bindchange="toggleNumberUsage" 
+                  data-instrument-index="{{instrumentIndex}}"
+                  data-number-index="{{numberIndex}}"
+                  color="rgb(235, 236, 155)"
+                />
+              </view>
+            </view>
+            <view wx:if="{{number.inUse && item.name === '核酸提取仪'}}" class="input-wrapper">
+              <input 
+                class="usage-input" 
+                placeholder="请备注仪器用途" 
+                value="{{number.remark}}"
+                bindinput="updateRemark" 
+                data-instrument-index="{{instrumentIndex}}"
+                data-number-index="{{numberIndex}}"
+              />
+            </view>
+          </view>
+        </view>
+      </block>
+      
+      <view class="submit-button-container" wx:if="{{!if_submit}}">
+        <button class="submit-button" bindtap="submitForm">提交</button>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<view class="custom-dialog {{showDialog ? 'show' : ''}}" catchtouchmove="preventTouchMove">
+  <view class="dialog-content">
+    <view class="dialog-header">
+      <text class="dialog-title">实验室扫码信息确认</text>
+    </view>
+    <view class="dialog-body">
+      <view class="info-row">
+        <text class="info-label">当前房间：</text>
+        <text class="info-value">II样品处理室</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">实验流程：</text>
+        <text class="info-value">{{process}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">实验人员：</text>
+        <text class="info-value">{{operatorName}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">{{process === '日常' ? '请自主选择要使用的仪器' : '已帮您预选下列实验仪器：'}}</text>
+        <view class="spacing"></view>
+        <scroll-view scroll-y style="max-height: 300rpx;">
+          <view class="preselected-instruments">
+            <view wx:for="{{preselectedInstruments}}" wx:key="*this" class="instrument-box">
+              <text class="instrument-name">{{item}}</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+    <view class="dialog-footer">
+      <button class="dialog-button" bindtap="closeDialog">确定</button>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

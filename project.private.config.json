@@ -1,0 +1,113 @@
+{
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "projectname": "%E8%B0%B7%E7%A6%BE%E5%AE%9E%E9%AA%8C%E5%AE%A4%E8%AE%B0%E5%BD%95",
+  "setting": {
+    "compileHotReLoad": true,
+    "skylineRenderEnable": true,
+    "urlCheck": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "房间2进入培养",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/room2/room2&params=%7B%22process%22%3A%22culture%22%2C%22operation%22%3A%22enter%22%7D",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "房间2进入日常",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/room2/room2&params=%7B%22process%22%3A%22daily%22%2C%22operation%22%3A%22enter%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "房间2进入提取",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/room2/room2&params=%7B%22process%22%3A%22extraction%22%2C%22operation%22%3A%22enter%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "房间2离开",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/room2/room2&params=%7B%22process%22%3A%22CNAS%22%2C%22operation%22%3A%22leave%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "房间2进入CNAS",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/room2/room2&params=%7B%22process%22%3A%22CNAS%22%2C%22operation%22%3A%22enter%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "冰箱温度监测记录",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/fridge/fridge&params=%7B%22freezerFridge%22%3A%22fridge%22%2C%22roomNumber%22%3A2%2C%22fridgeNumber%22%3A%22GHJC-EQ0023%22%2C%22tNumber%22%3A%22GHJC-EQ0028%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "冰柜温度监测记录",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/fridge/fridge&params=%7B%22freezerFridge%22%3A%22freezer%22%2C%22roomNumber%22%3A2%2C%22freezerNumber%22%3A%22GHJC-EQ0022%22%2C%22tNumber%22%3A%22GHJC-EQ0027%22%2C%22thNumber%22%3A%22GHJC-EQ0026%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "超净工作台",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/workbench/workbench",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "离开房间",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/daily/daily&params=%7B%22roomStatus%22%3A%22leave%22%2C%22operationType%22%3A%22daily%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "进入房间+日常操作",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/daily/daily&params=%7B%22roomStatus%22%3A%22enter%22%2C%22operationType%22%3A%22daily%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "进入房间+CNAS",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/daily/daily&params=%7B%22roomStatus%22%3A%22enter%22%2C%22operationType%22%3A%22cnas%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "房间操作固定页面小程序码测试",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/daily/daily&params=%7B%22roomStatus%22%3A%22leave%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "测序仪测试",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/sequencer/sequencer",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
+          "name": "测试授权+跳转页面",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/room/daily/daily&params=%7B%22roomStatus%22%3A%22enter%22%7D",
+          "launchMode": "default",
+          "scene": 1047
+        }
+      ]
+    }
+  }
+}

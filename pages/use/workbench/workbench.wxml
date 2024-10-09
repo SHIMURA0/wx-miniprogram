@@ -1,0 +1,272 @@
+<!-- 导航栏，最顶部那一栏 -->
+<navigation-bar 
+  title="超净工作台使用记录" 
+  back="{{true}}" 
+  color="white" 
+  background="#4A90E2">
+</navigation-bar>
+
+<!-- 页面主体 -->
+<view class="container">
+  <scroll-view scroll-y="true" class="form-scroll">
+    <!-- 标题模块 -->
+    <view class="header">
+      <text class="main-title">（实用垂直新颖）单人净化工作台使用记录</text>
+    </view>
+    <!-- 标题模块 -->
+    <!-- 填写的表单模块 -->
+    <form bindsubmit="submitForm">
+      <!-- 第一个大框，包含操作人员和操作类型两个模块 -->
+      <view class="form-group horizontal">
+        <!-- 操作人员模块 -->
+        <view class="form-item">
+          <view class="text-box">
+            <text class="label" >操作人员</text>
+          </view>
+          <text 
+            class="value readonly-value" 
+            style="width: 295rpx; display: block; box-sizing: border-box">{{operatorName}}
+          </text>
+        </view>
+        <!-- 操作人员模块 -->
+        <!-- 操作类型模块 -->
+        <view class="form-item">
+          <view class="text-box-orange">
+            <text class="label">操作类型</text>
+          </view>
+          <!-- 操作类型下拉选择（开始/结束） -->
+          <picker 
+            bindchange="operationStatusChange" 
+            value="{{operationStatusIndex}}" 
+            range="{{operationStatus}}"
+          >
+            <view 
+              class="picker" 
+              style="width: 295rpx; display: block; box-sizing: border-box"
+            >{{operationStatusIndex === null ? "请选择开始/结束" : operationStatus[operationStatusIndex]}}
+            </view>
+          </picker>
+        </view>
+        <!-- 操作类型模块 -->
+      </view>
+
+      <!-- 第二个大框，包含选定仪器和仪器编号两个模块 -->
+      <view class="form-group horizontal">
+        <!-- 选定仪器模块 -->
+        <view class="form-item">
+          <view class="text-box">
+            <text class="label" >选定仪器</text>
+          </view>
+          <text 
+            class="value readonly-value" 
+            style="width: 295rpx; display: block; box-sizing: border-box">{{selectedInstrument}}
+          </text>
+        </view>
+        <!-- 选定仪器模块 -->
+        <!-- 仪器编号模块 -->
+        <view class="form-item">
+          <view class="text-box">
+            <text class="label">仪器编号</text>
+          </view>
+          <text 
+            class="value readonly-value" 
+            style="width: 295rpx; display: block; box-sizing: border-box">{{selectedInstrumentNumber}}
+          </text>
+        </view>
+        <!-- 仪器编号模块 -->
+      </view>
+      <!-- 第三个大框，包含绑定仪器和仪器编号两个模块 -->
+      <view class="form-group horizontal">
+        <!-- 绑定仪器模块 -->
+        <view class="form-item">
+          <view class="text-box">
+            <text class="label" >绑定仪器</text>
+          </view>
+          <text 
+            class="value readonly-value" 
+            style="width: 295rpx; display: block; box-sizing: border-box">{{boundInstrument}}
+          </text>
+        </view>
+        <!-- 绑定仪器模块 -->
+        <!-- 绑定仪器的仪器编号模块 -->
+        <view class="form-item">
+          <view class="text-box">
+            <text class="label">仪器编号</text>
+          </view>
+          <text 
+            class="value readonly-value" 
+            style="width: 295rpx; display: block; box-sizing: border-box">{{boundInstrumentNumber}}
+          </text>
+        </view>
+        <!-- 绑定仪器的仪器编号模块 -->
+      </view>
+      <!-- 第四个大框，包含超净工作台的状态和水浴锅的状态 -->
+      <view class="form-group horizontal">
+        <!-- 超净工作台状态模块 -->
+        <view class="form-item">
+          <view class="text-box-orange">
+            <text class="label" >超净工作台状态</text>
+          </view>
+          <picker 
+            bindchange="workBenchStatusChange" 
+            value="{{workBenchStatusIndex}}" 
+            range="{{workBenchStatus}}"
+          >
+            <view 
+              class="picker" 
+              style="width: 295rpx; display: block; box-sizing: border-box"
+            >{{workBenchStatusIndex !== null ? workBenchStatus[workBenchStatusIndex] : '请检查状态'}}
+            </view>
+          </picker>
+        </view>
+        <!-- 超净工作台状态模块 -->
+        <!-- 水浴锅状态模块 -->
+        <view class="form-item">
+          <view class="text-box-orange">
+            <text class="label">水浴锅状态</text>
+          </view>
+          <picker 
+            bindchange="waterBathStatusChange" 
+            value="{{waterBathStatusIndex}}" 
+            range="{{waterBathStatus}}"
+          >
+            <view 
+              class="picker" 
+              style="width: 295rpx; display: block; box-sizing: border-box"
+            >{{waterBathStatusIndex !== null ? waterBathStatus[waterBathStatusIndex] : '请检查状态'}}
+            </view>
+          </picker>
+        </view>
+        <!-- 水浴锅状态模块 -->
+      </view>
+
+      <!-- 在操作类型选为结束的时候需要额外填写的大框，包含了是否清洁和是否紫外线杀菌两个模块 -->
+      <view class="form-group horizontal" wx:if="{{operationStatus[operationStatusIndex] === '结束'}}">
+        <!-- 是否清洁模块 -->
+        <view class="form-item">
+          <view class="text-box-orange">
+            <text class="label" >是否清洁</text>
+          </view>
+          <picker 
+            bindchange="cleanStatusChange" 
+            value="{{cleanStatusIndex}}" 
+            range="{{cleanStatus}}"
+          >
+            <view 
+              class="picker" 
+              style="width: 295rpx; display: block; box-sizing: border-box"
+            >{{cleanStatusIndex !== null ? cleanStatus[cleanStatusIndex] : '请检查清洁'}}
+            </view>
+          </picker>
+        </view>
+        <!-- 是否清洁模块 -->
+        <!-- 是否紫外线杀菌模块 -->
+        <view class="form-item">
+          <view class="text-box-orange">
+            <text class="label">是否紫外线杀菌</text>
+          </view>
+          <picker 
+            bindchange="uvStatusChange" 
+            value="{{uvStatusIndex}}" 
+            range="{{uvStatus}}"
+          >
+            <view 
+              class="picker" 
+              style="width: 295rpx; display: block; box-sizing: border-box"
+            >{{uvStatusIndex !== null ? uvStatus[uvStatusIndex] : '请检查杀菌'}}
+            </view>
+          </picker>
+        </view>
+        <!-- 是否紫外线杀菌模块 -->
+      </view>
+      <!-- 操作日期模块 -->
+      <view class="form-group">
+        <view class="text-box">
+          <text class="label">操作日期</text>
+        </view>
+        <text class="value readonly-value">{{currentDateTime}}</text>
+      </view>
+      <!-- 操作日期模块 -->
+      <!-- 备注模块 -->
+      <view class="form-group">
+        <view class="text-box-orange">
+        <text class="label">备注</text>
+        </view>
+        <textarea 
+          style="height: 200rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx" bindinput="inputRemarks"
+          value="{{remarks}}"
+          placeholder="如有额外补充的，请填写备注"
+        />
+      </view>
+      <!-- 备注模块 -->
+      <!-- 提交按钮模块 -->
+      <button 
+        form-type="submit" 
+        type="primary" 
+        disabled="{{!isFormValid}}" 
+        style="opacity: {{isFormValid ? 1 : 0.5}}; pointer-events: {{isFormValid ? 'auto' : 'none'}};">提交
+      </button>
+      <!-- 提交按钮模块 -->
+    </form>
+  </scroll-view>
+
+  <!-- 超净工作台异常状态弹窗填写具体的异常表现 -->
+  <view class="modal" hidden="{{!showWorkBenchAbnormalModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>请具体描述异常表现</text>
+      </view>
+      <view class="modal-body">
+        <textarea 
+          bindinput="inputAbnormalWorkBenchDescription" 
+          placeholder="请输入具体的超净工作台异常表现">
+        </textarea>
+      </view>
+      <view class="modal-footer">
+        <button 
+            bindtap="cancelWorkBenchAbnormalDescription">取消
+        </button>
+        <button 
+          bindtap="submitWorkBenchAbnormalDescription">提交
+        </button>
+      </view>
+    </view>
+  </view>
+  <!-- 超净工作台异常状态弹窗填写具体的异常表现 -->
+  <!-- 水浴锅异常状态弹窗填写具体的异常表现 -->
+  <view class="modal" hidden="{{!showWaterBathAbnormalModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>请具体描述异常表现</text>
+      </view>
+      <view class="modal-body">
+        <textarea 
+          bindinput="inputAbnormalWaterBathDescription" 
+          placeholder="请输入具体的水浴锅异常表现">
+        </textarea>
+      </view>
+      <view class="modal-footer" style="display: flex; justify-content: space-between;">
+        <button 
+            bindtap="cancelWaterBathAbnormalDescription">取消
+        </button>
+        <button 
+          bindtap="submitWaterBathAbnormalDescription">提交
+        </button>
+      </view>
+    </view>
+  </view>
+  <!-- 水浴锅异常状态弹窗填写具体的异常表现 -->
+  <!-- 最终确认提交的表单模块 -->
+  <modal 
+    hidden="{{!showConfirmModal}}" 
+    title="确认提交" 
+    confirm-text="确认" 
+    cancel-text="取消" 
+    bindcancel="closeConfirmModal" 
+    bindconfirm="confirmSubmit"
+  >
+    <rich-text nodes="{{confirmContent}}">
+    </rich-text>
+  </modal>
+
+</view>

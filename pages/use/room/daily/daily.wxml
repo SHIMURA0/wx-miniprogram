@@ -1,0 +1,203 @@
+<!-- 顶部导航栏 -->
+<navigation-bar title="房间2仪器选择" back="{{true}}" color="white" background="#4A90E2" />
+
+<!-- 第一层大的条件渲染，在没有成功提交表单时候显示表单内容 -->
+<view class="container" wx:if="{{!isSuccess}}">
+
+  <scroll-view class="instrument-list">
+    <!-- 房间2 始终显示 -->
+    <view class="instrument-item" wx:for="{{instruments}}" wx:key="id" wx:if="{{item.name === '房间2'}}">
+      <text class="instrument-name">{{item.name}}</text>
+      <view class="slider-container {{item.isLocked ? 'locked' : ''}}">
+        <view class="slider {{item.checked ? 'slider-right' : 'slider-left'}}" bindtap="toggleInstrument" data-id="{{item.id}}">
+          <text class="slider-text">{{item.checked ? '离开' : '进入'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 第二层条件渲染，只在房间2位进入时显示下列仪器 -->
+    <block wx:if="{{!showOnlyRoom}}">
+      <view class="instrument-item" wx:for="{{instruments}}" wx:key="id" wx:if="{{item.name !== '房间2'}}">
+        <!-- 显示每一框的label和value/状态 -->
+        <!-- <view wx:if="{{item.name === '核酸提取仪'}}" class="info-display-container">
+          <view 
+            bindtap="showDialogForInstrument"
+            data-id="{{item.id}}"
+            data-name="{{item.name}}"
+            class="info-display-wrapper">
+            <view wx:if="{{nucleicAcidExtractorInfo}}" class="info-display">{{nucleicAcidExtractorInfo}}</view>
+            <view wx:else class="info-display-placeholder">点击输入信息</view>
+          </view>
+        </view>
+        <view class="instrument-name-row">
+          <text class="instrument-name">{{item.name}}</text>
+        </view> -->
+        
+        <view class="instrument-name-row">
+          <text class="instrument-name">{{item.name}}</text>
+          <view wx:if="{{item.name === '核酸提取仪'}}" class="input-button-container">
+            <!-- <view 
+              bindtap="showDialogForInstrument"
+              data-id="{{item.id}}"
+              data-name="{{item.name}}"
+              class="input-button">
+              {{nucleicAcidExtractorInfo ? nucleicAcidExtractorInfo : '未填写'}}
+            </view> -->
+            <!-- <switch class="instrument-switch" checked="{{item.checked}}" bindchange="toggleInstrument" data-id="{{item.id}}"></switch> -->
+          </view>
+          
+          <!-- <switch wx:else class="instrument-switch" checked="{{item.checked}}" bindchange="toggleInstrument" data-id="{{item.id}}"></switch> -->
+        </view>
+        <view class="instrument-controls">
+      <!-- 为移液器添加选择按钮 -->
+        <button wx:if="{{item.name === '核酸提取仪'}}" 
+                class="select-btn" 
+                bindtap="selectInstrument" 
+                data-id="{{item.id}}">
+          选择
+        </button>
+        <!-- 其他仪器保持原有的开关控制 -->
+      </view>
+        <!-- <view 
+          wx:if="{{item.name === '核酸提取仪'}}" 
+          bindtap="showDialogForInstrument" 
+          data-id="{{item.id}}" 
+          data-name="{{item.name}} " 
+          class="instrument-name-container">
+          <!-- <text class="instrument-name">{{item.name}}</text>
+          <view wx:if="{{nucleicAcidExtractorInfo}}" class="info-display">{{nucleicAcidExtractorInfo}}</view> -->
+          <!-- <view class="instrument-name-row">
+            <text class="instrument-name">{{item.name}}</text>
+            <switch checked="{{item.value}}" bindchange="toggleSwitch" data-id="{{item.id}}" />
+          </view>
+          <view wx:if="{{nucleicAcidExtractorInfo}}" class="info-display">{{nucleicAcidExtractorInfo}}</view>
+        </view>
+        <view class="instrument-name-row" wx:else>
+          <text class="instrument-name">{{item.name}}</text>
+          <switch checked="{{item.value}}" bindchange="toggleSwitch" data-id="{{item.id}}" />
+        </view> --> 
+        <!-- <text class="instrument-name" wx:else>{{item.name}}</text>
+         -->
+        <!-- 用if检测，如果label是房间2，控制房间2的状态 -->
+        <view wx:if="{{item.isSlider && item.name !== '操作'}}" class="slider-container {{item.isLocked ? 'locked' : ''}}">
+          <view class="slider {{item.checked ? 'slider-right' : 'slider-left'}}" bindtap="toggleInstrument" data-id="{{item.id}}">
+            <text class="slider-text">{{item.checked ? '是' : '否'}}</text>
+          </view>
+        </view>
+        <!-- 用elif检测，如果label是操作，控制操作的状态 -->
+        <view wx:elif="{{item.name === '操作' && item.isLocked}}" class="locked-operation">
+          {{operationOptions[item.selectedIndex]}}
+        </view>
+        <picker 
+          wx:elif="{{item.name === '操作' && !item.isLocked}}" 
+          bindchange="handleOperationChange" 
+          value="{{item.selectedIndex}}" 
+          range="{{operationOptions}}">
+          <view class="picker">
+            {{item.selectedIndex === -1 ? '请选择' : operationOptions[item.selectedIndex]}}
+          </view>
+        </picker>
+        <!-- else对剩余的情况操作，即控制所有仪器的状态 -->
+        <switch wx:else class="instrument-switch" checked="{{item.checked}}" bindchange="toggleInstrument" data-id="{{item.id}}"></switch>
+
+      </view>
+    </block>
+
+    <view class="footer">
+      <button class="submit-btn" bindtap="submitSelection">确认提交</button>
+    </view>
+
+  </scroll-view>
+</view>
+
+<view class="dialog-container" wx:if="{{showDialog}}">
+  <view class="dialog-content">
+    <view class="dialog-title">{{dialogInstrumentName}}</view>
+    <!-- <input class="dialog-input" placeholder="请输入序列号" bindinput="inputSerialNumber" />
+    <input class="dialog-input" placeholder="请输入检测对象" bindinput="inputTestObject" /> -->
+    <input 
+      class="dialog-input" 
+      type="text" 
+      bindinput="inputSerialNumber" 
+      value="{{serialNumber}}"
+      placeholder="请输入管理编号"
+    />
+    <input class="dialog-input" placeholder="请输入检测对象" bindinput="inputTestObject" value="{{testObject}}" data-target="testObject"
+    />
+    <view class="dialog-buttons">
+      <button class="dialog-cancel" bindtap="hideDialog">取消</button>
+      <button class="dialog-submit" bindtap="submitInstrumentInfo">保存</button>
+    </view>
+  </view>
+</view>
+
+<!-- wxml 文件 -->
+<!-- wxml 文件 -->
+
+<view class="confirm-container" wx:if="{{isSuccess}}">
+  <view class="confirm-card">
+
+    <view class="confirm-title">
+      <!-- <image class="confirm-icon" src="/images/success.png" /> -->
+      <text class="title">提交成功!</text>
+    </view>
+
+    <view class="confirm-info-section">
+      <view class="confirm-info-item">
+        <text class="label">实验人员</text>
+        <text class="value">{{realName}}</text>
+      </view>
+      <view class="confirm-info-item">
+        <text class="label">房间编号</text>
+        <text class="value">{{'2'}}</text>
+      </view>
+      <view class="confirm-info-item">
+        <text class="label">行为类型</text>
+        <text class="value">{{instruments[0]['checked'] ? '离开房间' : '进入房间'}}</text>
+      </view>
+      <view class="confirm-info-item" wx:if="{{!instruments[0]['checked']}}">
+        <text class="label">操作类型</text>
+        <text class="value">{{ operationOptions[instruments[1]['selectedIndex']]}}</text>
+      </view>
+      <view class="confirm-info-item">
+        <text class="label">操作时间</text>
+        <text class="value">{{currentDateTime}}</text>
+      </view>
+    </view>
+
+    <view class="confirm-instrument-section" wx:if="{{!instruments[0]['checked']}}">
+      <text class="section-title">仪器使用</text>
+      <view class="confirm-instrument-list">
+        <view 
+          class="confirm-instrument-item" 
+          wx:for="{{instruments}}" 
+          wx:key="id" 
+          wx:if="{{item.checked && item.name !== '房间2' && item.name !== '操作'}}"
+        >
+          <text class="confirm-instrument-name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="confirm-info-section" wx:if="{{remarks && !instruments[0]['checked']}}">
+      <view class="confirm-info-item">
+        <text class="label">备注</text>
+      </view>
+      <view class="confirm-info-value">
+        <text class="value">{{remarks}}</text>
+      </view>
+    </view>
+
+
+  </view>
+
+</view>
+
+
+
+
+
+
+
+
+

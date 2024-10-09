@@ -1,0 +1,129 @@
+page {
+  background-color: #f0f2f5;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  margin-bottom: 30rpx;
+  padding: 10rpx 0;
+  border-bottom: 1rpx solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* .instrument-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10rpx;
+}
+
+.instrument-item {
+  width: calc(30% -30 rpx);
+  margin: 10rpx;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  border-radius: 20rpx;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 5rpx 5rpx 10rpx #d1d9e6,
+              -5rpx -5rpx 10rpx #ffffff;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.instrument-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0; /* 移除负边距 */
+  width: 100%; /* 确保列表占满容器宽度 */
+}
+
+.instrument-item {
+  width: calc(50% - 10rpx); /* 调整为50%宽度，减去间隔 */
+  margin: 5rpx; /* 减小边距 */
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  border-radius: 20rpx;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 5rpx 5rpx 10rpx #d1d9e6,
+              -5rpx -5rpx 10rpx #ffffff;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.instrument-item::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.instrument-item-content {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+
+.instrument-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+

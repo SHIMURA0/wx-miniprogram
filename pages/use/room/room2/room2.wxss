@@ -1,0 +1,326 @@
+.page-content {
+  position: fixed;
+  top: 200rpx; /* 根据你的导航栏高度调整 */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff; /* 或者你想要的背景色 */
+}
+
+.scroll-container {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+
+.no-scroll {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+}
+
+.instrument-card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 15rpx;
+  box-shadow: 0 1rpx 30rpx rgba(100, 170, 236, 0.3);
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  width: calc(100% - 100rpx);
+  box-sizing: border-box;
+}
+
+.header {
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+}
+
+.header-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.header-info {
+  display: flex;
+  margin-top: 30rpx;
+  flex-direction: column;
+}
+
+.header-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.colored-box {
+  padding: 4rpx 12rpx;
+  border-radius: 10rpx;
+  color: white;
+  font-size: 22rpx;
+  min-width: 80rpx;
+  text-align: center;
+}
+
+.operation {
+  background-color: #4CAF50;
+}
+
+.operator {
+  background-color: #2196F3;
+}
+
+.process {
+  background-color: #FF9800;
+}
+
+.instrument-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.instrument-name {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.instrument-controls, .number-controls {
+  display: flex;
+  align-items: center;
+}
+
+.number-item {
+  margin-bottom: 15rpx;
+}
+
+.number-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.instrument-number {
+  font-size: 28rpx;
+  flex: 1;
+}
+
+.input-wrapper {
+  margin-top: 10rpx;
+  width: 100%;
+}
+
+.usage-input {
+  width: 100%;
+  height: 60rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  padding: 0 15rpx;
+  font-size: 26rpx;
+  box-sizing: border-box;
+}
+
+switch {
+  transform: scale(0.8);
+}
+
+.cnas-box {
+  display: inline-block;
+  margin-right: 8rpx;
+  padding: 0 3px;
+  background-color: #926df8;
+  color: white;
+  font-size: 10px;
+  border-radius: 5px;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+.instrument-controls .cnas-box,
+.number-controls .cnas-box {
+  margin-right: 5rpx;
+}
+
+.submit-button-container {
+  width: 100%;
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: center;
+}
+
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20rpx 40rpx;
+  font-size: 32rpx;
+  border-radius: 10rpx;
+  border: none;
+  box-shadow: 0 2rpx 5rpx rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:active {
+  background-color: #45a049;
+}
+
+/* 在您的 room2.wxss 文件中添加 */
+.custom-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.custom-dialog.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dialog-content {
+  background-color: white;
+  border-radius: 12px;
+  width: 85%;
+  max-width: 320px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-header {
+  background-color: #6489f0;
+  padding: 16px;
+}
+
+.dialog-title {
+  color: rgb(245, 245, 245);
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dialog-body {
+  padding: 20px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.info-item {
+  margin-bottom: 12px;
+}
+
+.info-label {
+  font-size: 14px;
+  color: #666;
+  flex: 1;
+}
+
+.info-value {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  flex: 2;
+  text-align: right;
+}
+
+.preselected-instruments {
+  margin-top: 8px;
+}
+
+.instrument-item {
+  margin-bottom: 12px;
+}
+
+.instrument-name {
+  font-size: 14px;
+  color: #4A90E2;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.instrument-numbers {
+  display: flex;
+  flex-direction: column;
+}
+
+.number-tag {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: white;
+  background-color: #FF9800;
+}
+
+.dialog-footer {
+  padding: 16px;
+  border-top: 1px solid #E0E0E0;
+}
+
+.dialog-button {
+  background-color: #6489f0;
+  color: white;
+  border: none;
+  padding: 10px 0;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.dialog-button:active {
+  opacity: 0.8;
+}
+
+.spacing {
+  height: 20rpx; /* 可以根据需要调整这个值 */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

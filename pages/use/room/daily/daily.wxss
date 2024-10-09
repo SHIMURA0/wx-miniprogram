@@ -1,0 +1,454 @@
+page {
+  background-color: #f5f7fa;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  padding: 30rpx 0;
+  border-bottom: 2rpx solid #e0e6ed;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 42rpx;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.instrument-list {
+  flex: 1;
+  margin: 20rpx 0;
+}
+
+.instrument-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40rpx 30rpx; /* 减小上下内边距 */
+  margin-bottom: 20rpx; /* 稍微减小项目间距 */
+  background-color: #ffffff;
+  border-radius: 20rpx; /* 稍微减小圆角 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  max-width: 75%; /* 限制最大宽度 */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.instrument-item:active {
+  transform: scale(0.98);
+}
+
+.instrument-name {
+  font-size: 34rpx;
+  color: #34495e;
+  font-weight: 500;
+}
+
+.instrument-name-container {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  width: 100%;
+  height: 100%;
+}
+
+.footer {
+  padding: 30rpx 0;
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: #0b5e85;
+  color: white;
+  font-size: 36rpx;
+  font-weight: 600;
+  padding: 25rpx 0;
+  border-radius: 12rpx;
+  box-shadow: 0 4rpx 6rpx rgba(52, 152, 219, 0.2);
+  transition: all 0.3s ease;
+}
+
+.submit-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 4rpx rgba(52, 152, 219, 0.2);
+}
+
+.slider-container {
+  width: 180rpx;  /* 增加宽度 */
+  height: 60rpx;
+  background-color: #e0e0e0;
+  border-radius: 8rpx;  /* 减小圆角 */
+  position: relative;
+  overflow: hidden;
+}
+
+.slider {
+  width: 90rpx;  /* 宽度为容器的一半 */
+  height: 60rpx;
+  border-radius: 4rpx;  /* 减小圆角 */
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* 房间滑动按钮选中进入的时候的颜色 */
+.slider-left {
+  left: 0;
+  background-color: #9e9ff0;
+}
+/* 房间滑动按钮选中离开的时候的颜色 */
+.slider-right {
+  right: 0;
+  background-color: #9e9ff0;
+}
+
+.slider-text {
+  color: white;
+  font-size: 28rpx;  /* 稍微增大字体 */
+}
+
+/* 新增样式，用于未选中的文字 */
+.slider-unselected-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 28rpx;
+}
+
+.slider-left .slider-unselected-text {
+  right: 20rpx;
+}
+
+.slider-right .slider-unselected-text {
+  left: 20rpx;
+}
+
+.slider-container.locked {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.picker {
+  background-color: #f0f0f0;
+  padding: 10rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  min-width: 100rpx;
+  text-align: center;
+}
+
+.locked-operation {
+  color: rgb(245, 245, 245);
+  padding: 10rpx;
+  background-color: #f8ad82;
+  border-radius: 5rpx;
+}
+
+
+/* ... 其他样式 ... */
+
+
+/* wxss 文件 */
+/* wxss 文件 */
+/* wxss 文件 */
+/* .confirm-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(161, 156, 156, 0.5);
+}
+
+.confirm-card {
+  background-color: rgb(253, 250, 250);
+  border-radius: 35rpx;
+  padding: 35rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  width: 90%;
+  height: 70%;
+  max-width: 600rpx;
+} */
+
+.confirm-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 90vh;
+  background-color: rgba(248, 244, 240, 0.5);
+  position: relative; /* 设置为相对定位 */
+}
+
+.confirm-card {
+  display: flex; /* 使用 flex 布局 */
+  flex-direction: column; /* 垂直排列子元素 */
+  justify-content: flex-start; /* 垂直方向从顶部开始对齐 */
+  align-items: center; /* 水平方向居中对齐 */
+  
+  background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+  backdrop-filter: blur(20rpx); /* 添加模糊效果 */
+  border: 1rpx solid rgba(241, 219, 204, 0.5); /* 添加边框 */
+  border-radius: 35rpx; /* 保持原有的圆角 */
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1), 0 6rpx 20rpx rgba(0, 0, 0, 0.08); /* 添加阴影效果 */
+  
+  padding: 35rpx;
+  width: 90%;
+  max-width: 600rpx;
+  
+  position: absolute; /* 绝对定位 */
+  top: 5%; /* 距离顶部20% */
+  bottom: 5%;
+  left: 50%; /* 水平居中 */
+  transform: translate(-50%, 0); /* 垂直偏移保持不变 */
+  
+  max-height: 80vh; /* 设置最大高度为视口高度的80% */
+  overflow-y: auto; /* 添加垂直滚动条 */
+  padding-bottom: 80rpx; /* 增加底部 padding */
+}
+
+
+
+.confirm-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.confirm-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 46rpx;
+  font-weight: bold;
+  color: #1aad19;
+  padding-bottom: 10px;
+}
+
+.confirm-info-section, .confirm-instrument-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40rpx;
+}
+
+.confirm-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 0;
+  border-bottom: 1rpx solid #e0e0e0;
+}
+
+.value {
+  font-size: 32rpx;
+  /* font-weight: bold; */
+  color: rgb(7, 2, 1);
+}
+
+.label {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+}
+
+.confirm-info-value {
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.value {
+  font-size: 28rpx;
+  color: rgb(0, 0, 0);
+  line-height: 1.5;
+}
+
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: rgb(211, 81, 92);
+  margin-bottom: 20rpx;
+}
+
+.confirm-instrument-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.confirm-instrument-item {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0rpx 0;
+}
+
+.confirm-instrument-name {
+  font-size: 28rpx;
+  color: #333;
+  margin-right: 20rpx;
+  text-align: right;  /* 添加右对齐 */
+}
+
+.confirm-instrument-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+/* 弹框 */
+.dialog-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(219, 218, 218, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dialog-content {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 10rpx;
+  width: 80%;
+}
+
+.dialog-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.dialog-input {
+  border: 1px solid #ccc;
+  border-radius: 20rpx;
+  padding: 10rpx;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dialog-cancel,
+.dialog-submit {
+  font-size: 28rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 5rpx;
+  margin-left: 10rpx;
+}
+
+.dialog-cancel {
+  background-color: #ccc;
+  color: #333;
+}
+
+.dialog-submit {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* .info-display {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #666;
+} */
+
+/*  */
+
+.instrument-item {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.instrument-name {
+  font-size: 13px;
+  color: #333;
+  flex: 1;
+}
+
+.input-button {
+  background-color: #f0f0f0;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
+}
+
+.instrument-switch {
+  flex-shrink: 0;
+}
+
+.instrument-controls {
+  display: flex;
+  align-items: center;
+  width: 100rpx; /* 调整宽度以适应按钮和开关 */
+  justify-content: flex-end;
+}
+
+.select-btn {
+  width: 100rpx; /* 调整按钮宽度 */
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: white;
+  background-color: #e6c973; /* 更改为图片中的颜色 */
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+  padding: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

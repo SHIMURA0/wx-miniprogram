@@ -1,0 +1,43 @@
+<!--index.wxml-->
+<!-- <navigation-bar title="谷禾实验标准记录" back="{{false}}" color="white" background="#4A90E2"></navigation-bar>
+<view class="container">
+  <view class="option-container">
+    <view class="option {{item.isActive ? 'active' : ''}}" 
+          bindtouchstart="handleTouchStart" 
+          bindtouchend="handleTouchEnd" 
+          data-index="{{index}}"
+          bindtap="navigateTo" 
+          data-page="{{item.page}}" 
+          wx:for="{{options}}" 
+          wx:key="index">
+      {{item.text}}
+    </view>
+  </view>
+</view> -->
+
+<navigation-bar title="谷禾实验标准记录模版" back="{{false}}" color="white" background="#4A90E2"></navigation-bar>
+<view class="container">
+  <view class="header">
+    <text class="main-title">谷禾实验标准记录</text>
+  </view>
+  <view class="instrument-list">
+    <view class="instrument-item" 
+          wx:for="{{options}}" 
+          wx:key="index"
+          bindtap="navigateTo" 
+          data-index="{{index}}"
+          data-page="{{item.page}}">
+      <view class="instrument-item-content" style="position: absolute; left: -2rpx; top: 0rpx">
+        <text class="instrument-name">{{item.text}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+
+
+
