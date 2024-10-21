@@ -59,7 +59,10 @@ Page({
     const userInfo = app.globalData.userInfo;
     this.setData({
       operatorName : userInfo.real_name,
-      isValid: false // 初始化表单为无效状态
+      isValid: false, // 初始化表单为无效状态
+      iceStatusIndex: 0,
+      thStatusIndex: 0,
+      tStatusIndex: 0
     })
     // 接收传入的参数
     let parameters = options;

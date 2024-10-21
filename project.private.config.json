@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "超净工作台",
+          "pathName": "pages/auth/auth",
+          "query": "targetPage=/pages/use/workbench/workbench",
+          "launchMode": "default",
+          "scene": 1047
+        },
+        {
           "name": "房间2进入培养",
           "pathName": "pages/auth/auth",
           "query": "targetPage=/pages/use/room/room2/room2&params=%7B%22process%22%3A%22culture%22%2C%22operation%22%3A%22enter%22%7D",
@@ -55,13 +62,6 @@
           "name": "冰柜温度监测记录",
           "pathName": "pages/auth/auth",
           "query": "targetPage=/pages/use/room/fridge/fridge&params=%7B%22freezerFridge%22%3A%22freezer%22%2C%22roomNumber%22%3A2%2C%22freezerNumber%22%3A%22GHJC-EQ0022%22%2C%22tNumber%22%3A%22GHJC-EQ0027%22%2C%22thNumber%22%3A%22GHJC-EQ0026%22%7D",
-          "launchMode": "default",
-          "scene": 1047
-        },
-        {
-          "name": "超净工作台",
-          "pathName": "pages/auth/auth",
-          "query": "targetPage=/pages/use/workbench/workbench",
           "launchMode": "default",
           "scene": 1047
         },
