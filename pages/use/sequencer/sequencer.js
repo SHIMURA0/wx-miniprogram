@@ -66,8 +66,7 @@ Page({
       isChipSequenceValidA: false,
       isChipSequenceValidB: false,
       isSequencing: true, // 确保初始状态是测序模式
-      isValid: false, // 初始化表单为无效状态
-      statusIndex: 0
+      isValid: false // 初始化表单为无效状态
     })
   },
 
