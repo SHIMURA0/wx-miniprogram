@@ -40,7 +40,9 @@ Page({
     const userInfo = app.globalData.userInfo;
     this.setData({
       operatorName: userInfo.real_name,
-      isValid: false // 初始化表单为无效状态
+      isValid: false, // 初始化表单为无效状态
+      workBenchStatusIndex: 0,
+      waterBathStatusIndex: 0
     })
   },
 
