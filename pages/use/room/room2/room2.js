@@ -128,68 +128,68 @@ Page({
         ]
       },
 
-      {
-        name: '冰柜',
-        inUse: false,
-        numbers: [
-          {number: 'GHJC-EQ0022', inUse: false, remark: '', hasCNAS: true}
-        ]
-      },
+      // {
+      //   name: '冰柜',
+      //   inUse: false,
+      //   numbers: [
+      //     {number: 'GHJC-EQ0022', inUse: false, remark: '', hasCNAS: true}
+      //   ]
+      // },
 
-      {
-        name: '数字温湿度计（冰柜）',
-        inUse: false,
-        numbers: [
-          {number: 'GHJC-EQ0026', inUse: false, remark: '', hasCNAS: true}
-        ]
-      },
+      // {
+      //   name: '数字温湿度计（冰柜）',
+      //   inUse: false,
+      //   numbers: [
+      //     {number: 'GHJC-EQ0026', inUse: false, remark: '', hasCNAS: true}
+      //   ]
+      // },
 
-      {
-        name: '数字温度计（冰柜）',
-        inUse: false,
-        numbers: [
-          {number: 'GHJC-EQ0027', inUse: false, remark: '', hasCNAS: true}
-        ]
-      },
+      // {
+      //   name: '数字温度计（冰柜）',
+      //   inUse: false,
+      //   numbers: [
+      //     {number: 'GHJC-EQ0027', inUse: false, remark: '', hasCNAS: true}
+      //   ]
+      // },
 
-      {
-        name: '冰箱',
-        inUse: false,
-        numbers: [
-          {number: 'GHJC-EQ0023', inUse: false, remark: '', hasCNAS: true}
-        ]
-      },
+      // {
+      //   name: '冰箱',
+      //   inUse: false,
+      //   numbers: [
+      //     {number: 'GHJC-EQ0023', inUse: false, remark: '', hasCNAS: true}
+      //   ]
+      // },
 
-      {
-        name: '数字温度计（冰箱）',
-        inUse: false,
-        numbers: [
-          {number: 'GHJC-EQ0028', inUse: false, remark: '', hasCNAS: true}
-        ]
-      },
+      // {
+      //   name: '数字温度计（冰箱）',
+      //   inUse: false,
+      //   numbers: [
+      //     {number: 'GHJC-EQ0028', inUse: false, remark: '', hasCNAS: true}
+      //   ]
+      // },
 
-      {
-        name: '低温酒精玻璃液体温度计',
-        inUse: false,
-        numbers: [
-          {number: 'GHJC-EQ0031', inUse: false, remark: '', hasCNAS: true}
-        ]
-      },
+      // {
+      //   name: '低温酒精玻璃液体温度计',
+      //   inUse: false,
+      //   numbers: [
+      //     {number: 'GHJC-EQ0031', inUse: false, remark: '', hasCNAS: true}
+      //   ]
+      // },
 
-      {
-        name: '单人净化工作台',
-        inUse: false,
-        numbers: [
-          {number: 'GHJC-EQ0159', inUse: false, remark: '', hasCNAS: true}
-        ]
-      },
-      {
-        name: '数显恒温水浴锅',
-        inUse: false,
-        numbers: [
-          {number: 'GHJC-EQ0117', inUse: false, remark: '', hasCNAS: true}
-        ]
-      },
+      // {
+      //   name: '单人净化工作台',
+      //   inUse: false,
+      //   numbers: [
+      //     {number: 'GHJC-EQ0159', inUse: false, remark: '', hasCNAS: true}
+      //   ]
+      // },
+      // {
+      //   name: '数显恒温水浴锅',
+      //   inUse: false,
+      //   numbers: [
+      //     {number: 'GHJC-EQ0117', inUse: false, remark: '', hasCNAS: true}
+      //   ]
+      // },
       {
         name: '12道移液器',
         inUse: false,
@@ -197,16 +197,76 @@ Page({
           {number: 'GHJC-YYQ0009', inUse: false, remark: ''},
           {number: 'GHJC-YYQ0010', inUse: false, remark: ''},
           {number: 'GHJC-YYQ0011', inUse: false, remark: ''},
-          {number: 'GHJC-YYQ0015', inUse: false, remark: ''},
+          // {number: 'GHJC-YYQ0015', inUse: false, remark: ''},
           {number: 'GHJC-YYQ0017', inUse: false, remark: ''},
-          {number: 'GHJC-YYQ0018', inUse: false, remark: ''},
+          // {number: 'GHJC-YYQ0018', inUse: false, remark: ''},
           {number: 'GHJC-YYQ0019', inUse: false, remark: ''}
         ]
       },
-
+    ],
+    // 在离开房间的时候要检查的仪器（包括是否清洁/是否紫外线消毒30分钟）
+    check_instruments: [
+      {
+        name: '台式离心机（右）',
+        inUse: true,
+        numbers: [
+          {number: '是否清洁', inUse: true, hasCNAS: true}
+          // {number: '是否紫外消毒30分钟', inUse: true}
+        ]
+      },
+      {
+        name: '台式离心机（左）',
+        inUse: true,
+        hasCNAS: true,
+        numbers: [
+          {number: '是否清洁', inUse: true}
+          // {number: '是否紫外消毒30分钟', inUse: true}
+        ]
+      },
+      {
+        name: '生物安全柜(加样)',
+        inUse: true,
+        numbers: [
+          {number: '是否清洁', inUse: true, hasCNAS: true},
+          {number: '是否紫外消毒30分钟', inUse: true, hasCNAS: true}
+        ]
+      },
+      {
+        name: '生物安全柜(提取)',
+        inUse: true,
+        numbers: [
+          {number: '是否清洁', inUse: true, hasCNAS: true},
+          {number: '是否紫外消毒30分钟', inUse: true, hasCNAS: true}
+        ]
+      },
+      {
+        name: '核酸提取仪（GHJC-EQ0146）',
+        inUse: true,
+        numbers: [
+          {number: '是否清洁', inUse: true},
+          {number: '是否紫外消毒30分钟', inUse: true}
+        ]
+      },
+      {
+        name: '核酸提取仪（GHJC-EQ0152）',
+        inUse: true,
+        numbers: [
+          {number: '是否清洁', inUse: true},
+          {number: '是否紫外消毒30分钟', inUse: true}
+        ]
+      },
+      {
+        name: '核酸提取仪（GHJC-EQ0153）',
+        inUse: true,
+        numbers: [
+          {number: '是否清洁', inUse: true},
+          {number: '是否紫外消毒30分钟', inUse: true}
+        ]
+      },
+      
+    ],
 
       // 其他仪器...
-    ],
     preselectedInstruments: [],
     showDialog: false,
     operatorName : '',
@@ -275,6 +335,9 @@ Page({
         { 
           name: '移液器', 
           numbers: [
+            // 'GHJC-YYQ0004',
+            // 'GHJC-YYQ0005',
+            // 'GHJC-YYQ0006',
             'GHJC-YYQ0007',
             'GHJC-YYQ0008',
             'GHJC-YYQ0013',
@@ -286,6 +349,17 @@ Page({
             'GHJC-YYQ0023',
           ] 
         },
+        { 
+          name: '12道移液器', 
+          numbers: [
+            'GHJC-YYQ0009',
+            'GHJC-YYQ0010',
+            'GHJC-YYQ0011',
+            'GHJC-YYQ0015',
+            'GHJC-YYQ0017',
+            'GHJC-YYQ0018',
+            'GHJC-YYQ0019',
+          ]}
       ],
       // 培养
       'culture': [
@@ -358,46 +432,87 @@ Page({
 
 
   toggleUsage: function(e) {
-    const { index } = e.currentTarget.dataset;
-    const isChecked = e.detail.value;
-    
-    let instruments = this.data.instruments;
-    instruments[index].inUse = isChecked;
+    if (this.data.operation !== 'leave') {
+      const { index } = e.currentTarget.dataset;
+      const isChecked = e.detail.value;
+      
+      let instruments = this.data.instruments;
+      instruments[index].inUse = isChecked;
 
-    // 只有当仪器开关被关闭时，才自动关闭所有编号的开关
-    if (!isChecked) {
-      instruments[index].numbers.forEach(number => {
-        number.inUse = false;
-      });
+      // 只有当仪器开关被关闭时，才自动关闭所有编号的开关
+      if (!isChecked) {
+        instruments[index].numbers.forEach(number => {
+          number.inUse = false;
+        });
+      }
+
+      this.setData({ instruments });
+
+      console.log(`Instrument ${instruments[index].name} usage toggled to ${isChecked}`);
+    } else {
+      const { index } = e.currentTarget.dataset;
+      const isChecked = e.detail.value;
+      
+      let check_instruments = this.data.check_instruments;
+      check_instruments[index].inUse = isChecked;
+
+      // 只有当仪器开关被关闭时，才自动关闭所有编号的开关
+      if (!isChecked) {
+        check_instruments[index].numbers.forEach(number => {
+          number.inUse = false;
+        });
+      }
+
+      this.setData({ check_instruments });
+
+      console.log(`Instrument ${check_instruments[index].name} usage toggled to ${isChecked}`);
     }
-
-    this.setData({ instruments });
-
-    console.log(`Instrument ${instruments[index].name} usage toggled to ${isChecked}`);
+    
   },
 
 
   toggleNumberUsage: function(e) {
-    const { instrumentIndex, numberIndex } = e.currentTarget.dataset;
-    const isChecked = e.detail.value;
-    
-    let instruments = this.data.instruments;
-    instruments[instrumentIndex].numbers[numberIndex].inUse = isChecked;
+    if (this.data.operation !== 'leave') {
+      const { instrumentIndex, numberIndex } = e.currentTarget.dataset;
+      const isChecked = e.detail.value;
+      
+      let instruments = this.data.instruments;
+      instruments[instrumentIndex].numbers[numberIndex].inUse = isChecked;
 
-    // 如果有任何编号被打开，自动打开仪器开关
-    if (isChecked) {
-      instruments[instrumentIndex].inUse = true;
-    } else {
-      // 如果所有编号都被关闭，自动关闭仪器开关
-      const allNumbersClosed = instruments[instrumentIndex].numbers.every(number => !number.inUse);
-      if (allNumbersClosed) {
-        instruments[instrumentIndex].inUse = false;
+      // 如果有任何编号被打开，自动打开仪器开关
+      if (isChecked) {
+        instruments[instrumentIndex].inUse = true;
+      } else {
+        // 如果所有编号都被关闭，自动关闭仪器开关
+        const allNumbersClosed = instruments[instrumentIndex].numbers.every(number => !number.inUse);
+        if (allNumbersClosed) {
+          instruments[instrumentIndex].inUse = false;
+        }
       }
+
+      this.setData({ instruments });
+
+      console.log(`Instrument ${instruments[instrumentIndex].name}, Number ${numberIndex + 1} usage toggled to ${isChecked}`);
+    } else {
+      const { instrumentIndex, numberIndex } = e.currentTarget.dataset;
+      const isChecked = e.detail.value;
+      
+      let check_instruments = this.data.check_instruments;
+      check_instruments[instrumentIndex].numbers[numberIndex].inUse = isChecked;
+
+      // 如果有任何编号被打开，自动打开仪器开关
+      if (isChecked) {
+        check_instruments[instrumentIndex].inUse = true;
+      } else {
+        // 如果所有编号都被关闭，自动关闭仪器开关
+        const allNumbersClosed = check_instruments[instrumentIndex].numbers.every(number => !number.inUse);
+        if (allNumbersClosed) {
+          check_instruments[instrumentIndex].inUse = false;
+        }
+      }
+
+      this.setData({ check_instruments });
     }
-
-    this.setData({ instruments });
-
-    console.log(`Instrument ${instruments[instrumentIndex].name}, Number ${numberIndex + 1} usage toggled to ${isChecked}`);
   },
 
   updateRemark: function(e) {

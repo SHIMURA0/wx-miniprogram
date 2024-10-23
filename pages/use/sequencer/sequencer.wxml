@@ -64,7 +64,7 @@
             </picker>
           </view>
           <!-- 295rpx -->
-          <view class="form-item" wx:if="{{statusIndex !== 1 && operations[operationIndex] !== '关闭仪器'}}">
+          <view class="form-item" wx:if="{{statusIndex !== 1 && operations[operationIndex] === '关闭仪器'}}">
             <view class="text-box-orange">
             <text class="label">测序槽类型</text>
             </view>
@@ -75,7 +75,7 @@
             </picker>
           </view>
         </view>
-        <view class="form-group" wx:if="{{statusIndex !== 1 && operations[operationIndex] !== '关闭仪器' && slotTypeIndex !== null}}" >
+        <view class="form-group" wx:if="{{statusIndex !== 1 && operations[operationIndex] === '关闭仪器' && slotTypeIndex !== null}}" >
           <!-- <view class="chip-sequence-container" wx:if="{{slotTypes[slotTypeIndex] === 'A' || slotTypes[slotTypeIndex] === 'A + B'}}">
             <view class="text-box-orange">
               <view class="label-row">

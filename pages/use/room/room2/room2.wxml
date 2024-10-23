@@ -74,6 +74,41 @@
           </view>
         </view>
       </block>
+
+      <block wx:elif="{{operation === 'leave' && !if_submit}}">
+        <view wx:for="{{check_instruments}}" wx:key="name" wx:for-index="instrumentIndex" class="instrument-card">
+          <view class="instrument-header">
+            <text class="instrument-name">{{item.name}}</text>
+            <view class="instrument-controls">
+              <text wx:if="{{item.numbers.length >= 1 && item.numbers[0].hasCNAS}}" class="cnas-box">CNAS</text>
+              <switch 
+                class="switch-instrument"
+                checked="{{item.inUse}}" 
+                bindchange="toggleUsage" 
+                data-index="{{instrumentIndex}}"
+              />
+            </view>
+          </view>
+
+          <view wx:for="{{item.numbers}}" wx:for-item="number" wx:key="number" wx:for-index="numberIndex" class="number-item">
+            <view class="number-section">
+              <text class="instrument-number">{{number.number}}</text>
+              <view class="number-controls">
+                <text wx:if="{{item.numbers.length >= 4 && number.hasCNAS}}" class="cnas-box">CNAS</text>
+                <switch 
+                  class="switch-number"
+                  wx:if="{{item.numbers.length >= 1}}"
+                  checked="{{number.inUse}}"
+                  bindchange="toggleNumberUsage" 
+                  data-instrument-index="{{instrumentIndex}}"
+                  data-number-index="{{numberIndex}}"
+                  color="rgb(235, 236, 155)"
+                />
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
       
       <view class="submit-button-container" wx:if="{{!if_submit}}">
         <button class="submit-button" bindtap="submitForm">提交</button>

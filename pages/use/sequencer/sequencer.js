@@ -568,13 +568,18 @@ Page({
       isSequencing: e.detail.value
     });
     this.resetForm();
+    if (this.data.statusIndex === 0) {
+      this.setData({statusIndex : 0});
+    } else {
+      this.setData({statusIndex : null});
+    }
   },
 
   // 重置表单函数
   resetForm: function() {
     this.setData({
       operationIndex: null,
-      statusIndex: null,
+      // statusIndex: null,
       slotTypeIndex: null,
       chipSequenceA: "",
       chipSequenceB: "",
