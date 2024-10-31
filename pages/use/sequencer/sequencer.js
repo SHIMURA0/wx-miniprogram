@@ -513,34 +513,42 @@ Page({
       remarks
     } = this.data;
   
-    let isValid = false;
-  
+    let isValid = false;  // 初始化表单验证变量
+    
     if (isSequencing) {
       // 测序表单验证逻辑
       if (operationIndex !== null) {
-        const selectedOperation = operations[operationIndex];
+        // 如果用户选择了操作类型
+        const selectedOperation = operations[operationIndex];  // 获得用户选择的具体操作类型
         if (selectedOperation === '关闭仪器') {
-          // 如果是关闭仪器，需要选择操作类型、仪器状态和仪器编号
-          isValid = statusIndex !== null;
+          // 如果用户选择了操作类型为关闭仪器，需要选择操作类型、仪器状态，测序槽类型和各个测序槽所对应的芯片序列号
+          isValid = operationIndex !== null &&
+                    statusIndex !== null &&
+                    slotTypeIndex !== null;
+          // 根据选择的测序槽类型验证芯片序列号
+          const selectedSlotType = slotTypes[slotTypeIndex];
+          if (selectedSlotType === 'A') {
+            isValid = isValid && 
+                      chipSequenceA.length === 11 && 
+                      isChipSequenceValidA;
+          } else if (selectedSlotType === 'B') {
+            isValid = isValid && 
+                      chipSequenceB.length === 11 && 
+                      isChipSequenceValidB;
+          } else if (selectedSlotType === 'A + B') {
+            isValid = isValid && 
+                      chipSequenceA.length === 11 && 
+                      isChipSequenceValidA &&
+                      chipSequenceB.length === 11 && 
+                      isChipSequenceValidB;
+          }
         } else if (statusIndex === 1) {  // 1 表示异常状态
           // 如果状态是异常，不需要检查测序槽类型和芯片序列号
           isValid = remarks !== null;
         } else {
-          // 正常状态下，需要检查所有字段
-          isValid = statusIndex !== null &&
-                    slotTypeIndex !== null;
-  
-          // 根据选择的测序槽类型验证芯片序列号
-          const selectedSlotType = slotTypes[slotTypeIndex];
-          if (selectedSlotType === 'A') {
-            isValid = isValid && chipSequenceA.length === 11 && isChipSequenceValidA;
-          } else if (selectedSlotType === 'B') {
-            isValid = isValid && chipSequenceB.length === 11 && isChipSequenceValidB;
-          } else if (selectedSlotType === 'A + B') {
-            isValid = isValid && 
-                      chipSequenceA.length === 11 && isChipSequenceValidA &&
-                      chipSequenceB.length === 11 && isChipSequenceValidB;
-          }
+          // 仪器正常状态且操作类型不为关闭仪器时，需要检查
+          isValid = statusIndex !== null &&  // 仪器状态不为空
+                    operationIndex !== null;  // 操作类型不为空
         }
       }
     } 
